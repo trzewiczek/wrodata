@@ -60,29 +60,28 @@ stations = [
 browser = webdriver.Chrome()
 
 # to keep daily data consistant start from yesterday (won't affect monthly)
-from_date = date.today() - timedelta(days=1)
+yesterday = date.today() - timedelta(days=1)
 
 for station in stations:
     try:
         # get the date for the most recent data available from the csv file name
-        data_path = os.path.join('raw_data', 'air', station['name'])
-        newest    = sorted(os.listdir(data_path)).pop()
-        till_date = datetime.strptime(newest[:-4], '%Y-%m-%d').date()
+        newest    = sorted(os.listdir(station['name'])).pop()
+        from_date = datetime.strptime(newest[:-4], '%Y-%m-%d').date() + timedelta(days=1)
     except FileNotFoundError:
         # no raw data folder for this station, i.e. no data collected yet
-        os.mkdir(os.path.join('raw_data', 'air', station['name']))
-        till_date = date(2017, 3, 4)
+        os.mkdir(station['name'])
+        from_date = date(2017, 3, 5)
     except IndexError:
         # or go till the begining of air monitoring, i.e. 2014-03-05
-        till_date = date(2017, 3, 4)
+        from_date = date(2017, 3, 5)
 
 
-    date_range = (from_date - till_date).days
+    date_range = (yesterday - from_date).days + 1
     print('>>> Focusing on {}'.format(station['name']))
     print('>>> Downloading data for {} days'.format(date_range))
 
     for delta in range(date_range):
-        current_date = from_date - timedelta(days=delta)
+        current_date = from_date + timedelta(days=delta)
 
         url_date_format = '%d.%m.%Y' if station['period'] == 'daily' else '%m.%Y'
         url = base_url.format(station['station'],
@@ -92,7 +91,7 @@ for station in stations:
             print('!!! Problem while processing {}'.format(current_date))
             continue
 
-        time.sleep(5)
+        time.sleep(2)
         downloads_folder = os.path.join(os.environ['HOME'], 'Downloads')
         fname = [f for f in os.listdir(downloads_folder) if f.startswith('dane')].pop()
         data_file = '{}.csv'.format(current_date.strftime('%Y-%m-%d'))
