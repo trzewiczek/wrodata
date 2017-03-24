@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="WIOŚ WWW">
+    <meta name="description" content="">
+    <meta name="author" content="DAC SYSTEM">
+
+                            <link rel="stylesheet" href="/static/core.css?v10" media="screen" type="text/css"/>
+            
+        <link rel="stylesheet" href="/static/browse.css?v10"/>
+            <link rel="stylesheet"
+          href="/static/../compass/stylesheets/styles/pl_WROC.css?v10"/>
+    <title>WIOŚ Wrocław - Prezentacja pomiarów</title>
+
+    <!--[if lte IE 9]><script>
+      (function(f){
+        window.setTimeout =f(window.setTimeout);
+        window.setInterval =f(window.setInterval);
+      })(function(f){return function(c,t){
+        var a=[].slice.call(arguments,2);return f(function(){c.apply(this,a)},t)}
+      });
+    </script><![endif]-->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-72652941-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+</head>
+<body class="metro browse base">
+  <header id="top-nav" class="bg-dark">
+    <div id="top-menu" class="navigation-bar dark fixed-top center-content" data-show="hover">
+        <div class="navigation-bar-content container">
+                    <a href="/" class="element"><span class="icon-home"></span> STRONA GŁÓWNA</a>
+    <span class="element-divider"></span>
+
+            
+        <ul     class="element-menu">
+                                                                        <li     class="first">
+                        <a class="dropdown-toggle" href="#">Informacje</a>
+    
+                            
+        <ul     class="dropdown-menu dark menu_level_1" data-role="dropdown">
+                                                                        <li     class="first">
+                        <a href="/ocena-jakosci-powietrza" >Ocena jakości powietrza</a>
+    
+                            
+        </li>
+    
+                                        <li    >
+                        <a href="/opis-monitorowanych-substancji" >Opis monitorowanych substancji</a>
+    
+                            
+        </li>
+    
+                                        <li    >
+                        <a href="/standardy-jakosci-powietrza" >Standardy jakości powietrza</a>
+    
+                            
+        </li>
+    
+                                        <li    >
+                        <a href="/indeks-jakosci-powietrza" >Indeks jakości powietrza</a>
+    
+                            
+        </li>
+    
+                                        <li    >
+                        <a href="/publikacje" >Publikacje</a>
+    
+                            
+        </li>
+    
+                                        <li     class="last">
+                        <a href="/prognozy" >Prognozy</a>
+    
+                            
+        </li>
+    
+                
+        </ul>
+    
+        </li>
+    
+                                        <li    >
+                        <a class="dropdown-toggle" href="#">Stacje pomiarowe</a>
+    
+                            
+        <ul     class="dropdown-menu dark menu_level_1" data-role="dropdown">
+                                                                        <li     class="first">
+                        <a href="/stacje/aktywne" >Stacje aktywne</a>
+    
+                            
+        </li>
+    
+                                        <li     class="last">
+                        <a href="/stacje/archiwalne" >Stacje archiwalne</a>
+    
+                            
+        </li>
+    
+                
+        </ul>
+    
+        </li>
+    
+                                        <li    >
+                        <a class="dropdown-toggle" href="#">Dane pomiarowe</a>
+    
+                            
+        <ul     class="dropdown-menu dark menu_level_1" data-role="dropdown">
+                                                                        <li     class="first">
+                        <a href="/dane-pomiarowe" >Dane aktualne</a>
+    
+                            
+        </li>
+    
+                                        <li     class="last">
+                        <a href="/archiwalne-dane-pomiarowe" >Dane archiwalne</a>
+    
+                            
+        </li>
+    
+                
+        </ul>
+    
+        </li>
+    
+                                        <li    >
+                        <a href="/komunikaty" >Komunikaty</a>
+    
+                            
+        </li>
+    
+                                        <li     class="last">
+                        <a href="http://www.wroclaw.pios.gov.pl/"  target="_blank" >WIOŚ Wrocław</a>
+    
+                            
+        </li>
+    
+                
+        </ul>
+    
+        </div>
+    </div>
+</header>
+<div class="a-big-header a-having-scrollable-background a-having-scroll-shadow ">
+      
+                    <div class="narrow-header center-content">
+    <div class="a-logo"></div>
+    <h1 class="title1">DOLNOŚLĄSKIE</h1>
+    <h1 class="title2">System monitoringu jakości powietrza</h1>
+          </div>
+</div>
+
+                <div id="address-bar">
+                        <nav class="breadcrumbs  center-content sidebar-not-included">
+                <ul>
+                                                                        <li class="">
+                                <a href="/">
+                                                                            <i class="icon-home"></i>
+                                                                        Strona główna
+                                </a>
+                            </li>
+                                                                                                <li class="">
+                                <a href="/dane-pomiarowe">
+                                                                            <i class="icon-search"></i>
+                                                                        Dane pomiarowe
+                                </a>
+                            </li>
+                                                                                                <li class="title">pomiary manualne</li>
+                                                            </ul>
+                                            </nav>
+        </div>
+    
+    <div style="padding: 15px 0px"
+         class="a-content-container  center-content sidebar-not-included">
+                    <div class="a-content-tile">
+            <div id="a-browse-data-filter-box" class="fluent-menu" data-role="fluentmenu">
+        <ul class="tabs-holder">
+            <li class="active"><a href="#tab_home">Filtrowanie wyników</a></li>
+                                </ul>
+
+        <div class="tabs-content">
+            <div class="tab-panel" id="tab_home" style="display: block;">
+                <div class="full-width">
+                
+                    <div class="tab-panel-group" style="width: 128px">
+                        <div class="tab-group-content">
+                            <div class="tab-content-segment">
+
+                                <div class="a-date-range-chooser">
+                                    <button class="fluent-button dropdown-toggle">
+                                        <span class="icon-pie on-left"></span>
+                                        <span class="button-label">
+                                                                                      miesięczny
+                                                                                  </span>
+                                    </button>
+                                    <ul class="dropdown-menu" data-role="dropdown">
+                                                                                                                    <li><a data-date-range="month" href="#">miesięczny</a></li>
+                                                                              <li><a data-date-range="year" href="#">roczny</a></li>
+                                    </ul>
+                                </div>
+                                <div class="a-datepicker input-control text"
+                                                                         >
+                                    <input type="text">
+                                    <button class="btn-date"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-group-caption">Data i typ raportu</div>
+                    </div>
+
+                    <div class="tab-panel-group" style="width: 300px">
+                        <div class="tab-group-content">
+                            <div class="tab-content-segment a-view-type-chooser" style="width:62px">
+                                <button class="fluent-big-button dropdown-toggle">
+                                    <span class="icon-home"></span>
+                                    <span class="button-label">Rodzaj widoku</span>
+                                </button>
+                                <ul class="dropdown-menu" data-role="dropdown">
+                                    <li class="checked active"><a href="#" data-view-type="station">wiele
+                                            parametrów na jednej stacji</a></li>
+                                    <li><a href="#" data-view-type="parameter">jeden parametr na
+                                            wielu stacjach</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-content-segment">
+                                <input class="a-s1" type="hidden" style="width:100%">
+                            </div>
+                        </div>
+                        <div class="tab-group-caption">Sposób przeglądania</div>
+                    </div>
+
+                    <div class="tab-panel-group">
+                        <div class="tab-group-content">
+                            <div class="tab-content-segment">
+                                <input class="a-s2" style="width:100%">
+                                
+                                                                                                                                                                                                                            
+                                                                                                </div>
+                        </div>
+                        <div class="tab-group-caption">Filtr</div>
+                    </div>
+
+                    <div class="tab-panel-group a-apply-box">
+                        <div class="tab-group-content">
+                            <div class="tab-content-segment">
+                                <button class="a-apply-filter fluent-big-button">
+                                    <span class="icon-filter"></span>
+                                    <span class="button-label">Zastosuj</span>
+                                </button>
+                                <div class="a-validation-info" style="display:none">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-group-caption"></div>
+                    </div>
+                </div>
+            </div>
+
+                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                            </div>
+    </div>
+
+    <br>
+
+    <div id="a-data-browser">
+        <h2>Użyj powyższego filtru, aby wyświetlić dane</h2>
+
+        
+        <div class="accordion" data-role="accordion" data-closeany="false">
+            <div class="a-charts accordion-frame">
+                <a href="#" class="heading active">Wykres</a>
+
+                <div class="content">
+                    <div id="chart-container"></div>
+                </div>
+            </div>
+            <div class="a-table accordion-frame">
+                <a href="#" class="heading active">Tabela</a>
+
+                <div class="a-accordion-heading-right">
+                    eksportuj do:
+                    <a href="#" id="table-export-to-calc">Excel</a>,
+                    <a href="#" download="dane_pomiarowe.csv" id="table-export-to-csv">CSV</a>
+                </div>
+                <div class="content">
+                    <div id="table-container"></div>
+                                                                                    <div id="legend-box" class="a-legend-box">
+                        <h3>Legenda</h3>
+                        <div class="a-legend-item">
+                          <div class="a-item-color a-lv-exceeded"></div>
+                          <div class="a-item-desc">Przekroczenie poziomu dopuszczalnego.</div>
+                          <div class="a-clear"></div>
+                        </div>
+                        <div class="a-legend-item">
+                          <div class="a-item-color a-tv-exceeded"></div>
+                          <div class="a-item-desc">Przekroczenie poziomu docelowego.</div>
+                          <div class="a-clear"></div>
+                        </div>
+                        <div class="a-legend-item">
+                          <div class="a-item-color a-it-exceeded"></div>
+                          <div class="a-item-desc">Przekroczenie poziomu informowania.</div>
+                          <div class="a-clear"></div>
+                        </div>
+                        <div class="a-legend-item">
+                          <div class="a-item-color a-at-exceeded"></div>
+                          <div class="a-item-desc">Przekroczenie poziomu alarmowego.</div>
+                          <div class="a-clear"></div>
+                        </div>
+
+                        <br>
+                        <div class="a-legend-item">
+                            <div class="a-item-color">1)</div>
+                            <div class="a-item-desc">Brak wymaganego pokrycia danych.</div>
+                            <div class="a-clear"></div>
+                        </div>
+                        <div class="a-legend-item">
+                          <div class="a-item-color">2)</div>
+                          <div class="a-item-desc">Wartość ośmiogodzinnej średniej kroczącej przypisanej do danej godziny stanowi średnią z ośmiu ostatnich ważnych wartości jednogodzinnych (przykładowo: dla godziny 1:00 do obliczeń brane są wartości pomiarów godzinnych z godzin 18:00-1:00, dla godziny 2:00 wartości z godzin 19:00-2:00 itd.).</div>
+                          <div class="a-clear"></div>
+                        </div>
+                        <div class="a-legend-item">
+                          <div class="a-item-color">3)</div>
+                          <div class="a-item-desc">Zgodnie z Wytycznymi Komisji Europejskiej do decyzji 2011/850/UE przekroczenie normy jakości powietrza występuję wtedy, gdy wartość odpowiedniej statystyki (np. średniej rocznej) po zaokrągleniu do ilości miejsc znaczących z jaką podana jest norma przekracza wartość normowaną, np. poziom docelowy dla benzo(a)pirenu wynosi 1&nbsp;ng/m<sup>3</sup>, jeżeli stężenie średnioroczne benzo(a)pirenu na stanowisku pomiarowym wynosi 1,50&nbsp;ng/m<sup>3</sup> to zgodnie z ww. wytycznymi otrzymany wynik zaokrągla się do 2&nbsp;ng/m<sup>3</sup> (co jest przekroczeniem normy), jeżeli stężenie średnioroczne benzo(a)pirenu na stanowisku pomiarowym wynosi 1,48&nbsp;ng/m<sup>3</sup> to otrzymany wynik zaokrągla się do 1&nbsp;ng/m<sup>3</sup> (co nie jest przekroczeniem normy).</div>
+                          <div class="a-clear"></div>
+                        </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="a-browse-toolbar">
+      <div class="a-toolbar-body">
+                                                            <div class="a-label a-goto-btn" data-goto="#a-data-browser .a-charts">
+          <i class="icon-bars"></i> wykres
+        </div>
+        <div class="a-label a-goto-btn" data-goto="#a-data-browser .a-table">
+          <i class="icon-stats"></i> tabela
+        </div>
+        <div class="a-label a-hide-btn" data-powertip="ukryj">
+          <i class="icon-arrow-up-2"></i>
+        </div>
+      </div>
+    </div>
+    <div class="a-browse-toolbar2">
+      <div class="a-toolbar-body">
+        <div class="a-label a-show-btn" data-powertip="pokaż pasek narzędzi">
+          <i class="icon-arrow-down-2"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="a-export2xls-help">
+      <p>Do eksportu danych do arkusza kalkulacyjnego można wykorzystać schowek, w tym celu:</p>
+      <ol>
+        <li>Naciśnij kombinację klawiszy <kbd>CTRL+C</kbd>.</li>
+        <li>W arkuszu kalkulacyjnym użyj opcji <i>Wklej</i> lub naciśnij kombinację klawiszy <kbd>CTRL+V</kbd>.</li>
+      </ol>
+    </div>
+
+
+    <script type="application/javascript">
+        var date = 1470006000000;
+        var minDate = parseInt(1388530800);
+
+        var app = app || {};
+        app.config = app.config || {};
+        app.config.DataBrowser = {
+            dataUrl: '/dane-pomiarowe/pobierz',
+            stationState: 'active',
+                      configUrl: '/dane-pomiarowe/wczytaj-konfiguracje',
+                      useHistoryAPI: !!(window.history && history.pushState),
+            measType: 'manual',
+            data: { // null, jeśli selektor ma być domyślnie niewypełniony
+                viewType: 'station',
+                viewTypeEntityId: '12',
+                dateRange: 'month',
+                date: date + 3600000, // CET offset
+                minDate: minDate,
+                channels: [1506,1450,1449,1451,1452,1453,1454,1455,1507,1509,1511,1448]
+            }
+        };
+    </script>
+    </div>
+        
+
+    </div>
+
+    <div class="a-footer">
+        W serwisie wykorzystywane są pliki cookies w celu zapamiętania stanu elementów interfejsu.
+        <a id="acceptCookiesButton" class="button small" onclick="acceptCookies()">Akceptuję</a>
+    </div>
+    <script type="text/javascript">
+        function acceptCookies() {
+            Cookies.set('cookiesAccepted', 'yes');
+            $('.a-footer').slideUp();
+        }
+    </script>
+
+              <script type="text/javascript" src="/static/core.js?v10"></script>
+    
+    
+    
+    <script type="text/javascript" src="/static/browse.js?v10"></script>
+    
+    <script src="/js/routing?callback=fos.Router.setData"></script>
+    <script type="application/javascript">
+        $(function () {
+            // separator w zależności od locale (jeśli występuje pl to użyj `;`)
+            var i18n = navigator.languages || (navigator.userLanguage && [navigator.userLanguage]) || (navigator.language && [navigator.language]) || [],
+                separator = (i18n.indexOf('pl') !== -1 ? ';' : ',');
+
+            //
+            /**
+             * Pozbywa się wrapperów wartości `"` jeżeli występują.
+             * @param {string} csvValue
+             * @returns {string}
+             */
+            var trim = function(csvValue) {
+                return csvValue.replace(/^"(.*)"$/, '$1');
+            };
+            //
+            var csvBtn = $('#table-export-to-csv');
+            csvBtn.on('click', function (e) {
+                var data = $('#table-container > table').table2CSV({
+                    delivery: 'value',
+                    separator: separator,
+                });
+                var lines = data.split('\n');
+
+                //begin: dostosowanie nagłówka
+                var headerLine = lines[0],
+                    headers = headerLine.split(separator),
+                    newHeaderLine = [headers[0]];
+
+                var len = (headers.length - 1) / 2;
+                for (var i = 1; i <= len; ++i) {
+                    var j = i + len;
+                    newHeaderLine.push('"' + trim(headers[i]) + ' ' + trim(headers[j]) + '"');
+                }
+                newHeaderLine = newHeaderLine.join(separator);
+                // usunięcie przypisów
+                newHeaderLine = newHeaderLine.replace(/\d\)/g, '');
+                lines.splice(0, 1, newHeaderLine);
+                //end: dostosowanie nagłówka
+
+                data = lines.join('\n');
+
+                // usunięcie &nbsp;
+                data = data.replace(/&nbsp;/g, ' ');
+
+                var link = this,
+                  d = new Date(),
+                  now = d.format('yyyy-mm-dd_HH-MM-ss'),
+                  filename = 'dane-pomiarowe_' + now + '.csv';
+                FileSaver.saveAs(data, "text/csv", "UTF-8", filename, link);
+            });
+
+            var calcBtn = $('#table-export-to-calc');
+            var help = $('#a-export2xls-help');
+            calcBtn.on('click', function (e) {
+              e.preventDefault();
+              var table = $('#table-container > table');
+
+              var dialog = $.Dialog({
+                overlay: true,
+                flat: true,
+                icon: '<i class="icon-file-excel"></i>',
+                title: 'Eksportowanie danych do arkusza kalkulacyjnego',
+                content: help.html(),
+                padding: 10,
+                cls: 'a-export-window', // dimm are set in css
+                onShow: function(_dialog){
+                  app.utils.selectContent(table.get(0));
+                },
+                onClose: function () {
+//                  console.log('# A #');
+                }
+              });
+              // there is no close event in Dialog so one can bind to the close btn
+              dialog.find('button.btn-close').one('click', function() {
+                app.utils.clearSelection();
+              });
+
+            });
+
+            //
+            // toolbar
+            //
+            var isTransitionSupported = app.utils.supportCssProperty('transition');
+
+            var toolbar = $('.a-browse-toolbar');
+            var toolbar2 = $('.a-browse-toolbar2'); // przycisk "pokaż"
+
+            toolbar.find('.a-goto-btn').on('click', function(e) {
+              var selector = $(this).attr('data-goto');
+              app.scrollToEl(selector);
+            });
+
+            toolbar.find('.a-hide-btn').on('click', function(e) {
+              if (!toolbar.hasClass('a-hidden')) {
+                app.utils.cssTransition(toolbar, 'a-hidden', function() {
+                  toolbar2.fadeIn();
+                });
+                if (!isTransitionSupported) {
+                  toolbar2.fadeIn();
+                }
+              }
+            });
+            toolbar2.find('.a-show-btn').on('click', function(e) {
+              if (toolbar.hasClass('a-hidden')) {
+//                app.utils.cssTransition(toolbar, 'a-hidden', function() {
+//                  toolbar2.fadeOut();
+//                });
+                toolbar.toggleClass('a-hidden');
+                toolbar2.fadeOut(600);
+              }
+            });
+
+            toolbar.find('.a-shrink-table-btn').on('click', function(e) {
+              var cntr = $('#table-container');
+              cntr.children('table').addClass('a-shrinked-table');
+              cntr.doubleScroll('refresh');
+
+              $(this).hide();
+              toolbar.find('.a-expand-table-btn').show();
+            });
+            toolbar.find('.a-expand-table-btn').on('click', function(e) {
+              var cntr = $('#table-container');
+              cntr.children('table').removeClass('a-shrinked-table');
+              cntr.doubleScroll('refresh');
+
+              $(this).hide();
+              toolbar.find('.a-shrink-table-btn').show();
+            });
+        });
+    </script>
+
+</body>
+</html>

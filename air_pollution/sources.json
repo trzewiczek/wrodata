@@ -4,18 +4,26 @@
       {
           "name"   : "bartnicza",
           "url"    : "automatyczne/stacja/14/parametry/254-259-255-257/dzienny/",
-          "period" : "daily"
+          "period" : "daily",
+          "begins" : "2014-03-05"
       },
       {
           "name"   : "korzeniowskiego",
           "url"    : "automatyczne/stacja/12/parametry/209-215-543-545-222-223-216-544-218/dzienny/",
-          "period" : "daily"
+          "period" : "daily",
+          "begins" : "2014-03-05"
       },
       {
           "name"   : "wisniowa",
           "url"    : "automatyczne/stacja/13/parametry/241-245-242-238-244/dzienny/",
-          "period" : "daily"
+          "period" : "daily",
+          "begins" : "2014-03-05"
+      },
+      {
+          "name"   : "korzeniowskiego_manual",
+          "url"    : "manualne/stacja/12/parametry/1506-1450-1449-1451-1452-1453-1454-1455-1507-1509-1511-1448/miesieczny/",
+          "period" : "monthly",
+          "begins" : "2014-01-01"
       }
   ]
 }
-
