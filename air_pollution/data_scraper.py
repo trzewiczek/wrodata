@@ -13,6 +13,7 @@ from datetime import date, datetime, timedelta
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, WebDriverException
 
+
 def download_csv_file(url, browser):
     ''' Scrapes pollution data for a given url
 
@@ -43,6 +44,31 @@ def download_csv_file(url, browser):
     return False
 
 
+def get_dates_for(station):
+    ''' Prepare starting date and date range to be downloaded
+
+        :station: a dict with station metadata
+        :return: a tuple of starting date and date range to be downloaded
+    '''
+    try:
+        # get the date for the most recent data available from the csv file name
+        newest = sorted(os.listdir(station['name'])).pop()
+        from_date = datetime.strptime(newest[:-4], '%Y-%m-%d').date() + timedelta(days=1)
+    except FileNotFoundError:
+        # no raw data folder for this station, i.e. no data collected yet
+        os.mkdir(station['name'])
+        from_date = datetime.strptime(station['begins'], '%Y-%m-%d').date()
+    except IndexError:
+        # or go till the begining of air monitoring, i.e. 2014-03-05
+        from_date = datetime.strptime(station['begins'], '%Y-%m-%d').date()
+
+    # to keep daily data consistant start from yesterday (won't affect monthly)
+    yesterday = date.today() - timedelta(days=1)
+    date_range = (yesterday - from_date).days + 1
+
+    return from_date, date_range
+
+
 def scrape(base_url, stations):
     ''' Scraper's entry point
 
@@ -51,32 +77,22 @@ def scrape(base_url, stations):
     '''
     browser = webdriver.Chrome()
 
-    # to keep daily data consistant start from yesterday (won't affect monthly)
-    yesterday = date.today() - timedelta(days=1)
-
     for station in stations:
-        try:
-            # get the date for the most recent data available from the csv file name
-            newest = sorted(os.listdir(station['name'])).pop()
-            from_date = datetime.strptime(newest[:-4], '%Y-%m-%d').date() + timedelta(days=1)
-        except FileNotFoundError:
-            # no raw data folder for this station, i.e. no data collected yet
-            os.mkdir(station['name'])
-            from_date = date(2017, 3, 5)
-        except IndexError:
-            # or go till the begining of air monitoring, i.e. 2014-03-05
-            from_date = date(2017, 3, 5)
-
-
-        date_range = (yesterday - from_date).days + 1
+        from_date, date_range = get_dates_for(station)
         print('>>> Focusing on {}'.format(station['name']))
-        print('>>> Downloading data for {} days'.format(date_range))
+        print('>>> Last data available: {}'.format(from_date))
 
+        visited_urls = set()
         for delta in range(date_range):
             current_date = from_date + timedelta(days=delta)
 
             url_date_format = '%d.%m.%Y' if station['period'] == 'daily' else '%m.%Y'
             url = base_url + station['url'] + current_date.strftime(url_date_format)
+
+            if url in visited_urls:
+                continue
+            else:
+                visited_urls.add(url)
 
             if not download_csv_file(url, browser):
                 print('!!! Problem while processing {}'.format(current_date))
@@ -85,11 +101,12 @@ def scrape(base_url, stations):
             time.sleep(2)
             downloads_folder = os.path.join(os.environ['HOME'], 'Downloads')
             fname = [f for f in os.listdir(downloads_folder) if f.startswith('dane')].pop()
-            data_file = '{}.csv'.format(current_date.strftime('%Y-%m-%d'))
+
+            csv_date_format = '%Y-%m-%d' if station['period'] == 'daily' else '%Y-%m'
+            data_file = '{}.csv'.format(current_date.strftime(csv_date_format))
 
             shutil.move(os.path.join(downloads_folder, fname),
                         os.path.join(station['name'], data_file))
-
 
     browser.quit()
 
