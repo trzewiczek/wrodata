@@ -1,5 +1,10 @@
+#!/usr/bin/env python
+
+''' Scraper for Wrocław, Poland air pollution data collected by PIOŚ '''
+
 import os
 import shutil
+import sys
 import time
 
 from datetime import date, datetime, timedelta
@@ -7,6 +12,24 @@ from datetime import date, datetime, timedelta
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, WebDriverException
 
+BASE_URL = 'https://demo.dacsystem.pl/dane-pomiarowe/{}/{}'
+STATIONS = [
+    {
+        'name'   : 'bartnicza',
+        'station': 'automatyczne/stacja/14/parametry/254-259-255-257/dzienny',
+        'period' : 'daily'
+    },
+    {
+        'name'   : 'korzeniowskiego',
+        'station': 'automatyczne/stacja/12/parametry/209-215-543-545-222-223-216-544-218/dzienny',
+        'period' : 'daily'
+    },
+    {
+        'name'   : 'wisniowa',
+        'station': 'automatyczne/stacja/13/parametry/241-245-242-238-244/dzienny',
+        'period' : 'daily'
+    },
+]
 
 def scrape_data(url, browser):
     ''' Scrapes pollution data for a given url
@@ -26,7 +49,7 @@ def scrape_data(url, browser):
             csv_link = browser.find_element_by_link_text('CSV')
             # one can only click what is visible
             half_the_browser = browser.get_window_size()['height'] / 2
-            vertical_offset  = csv_link.location['y'] - half_the_browser
+            vertical_offset = csv_link.location['y'] - half_the_browser
             browser.execute_script('window.scroll(0,{})'.format(vertical_offset))
 
             csv_link.click()
@@ -38,66 +61,55 @@ def scrape_data(url, browser):
     return False
 
 
-base_url = 'https://demo.dacsystem.pl/dane-pomiarowe/{}/{}'
-stations = [
-    {
-        'name': 'bartnicza',
-        'station': 'automatyczne/stacja/14/parametry/254-259-255-257/dzienny',
-        'period': 'daily'
-    },
-    {
-        'name': 'korzeniowskiego',
-        'station': 'automatyczne/stacja/12/parametry/209-215-543-545-222-223-216-544-218/dzienny',
-        'period': 'daily'
-    },
-    {
-        'name': 'wisniowa',
-        'station': 'automatyczne/stacja/13/parametry/241-245-242-238-244/dzienny',
-        'period': 'daily'
-    },
-]
+def main():
+    ''' Scraper's entry point '''
 
-browser = webdriver.Chrome()
+    browser = webdriver.Chrome()
 
-# to keep daily data consistant start from yesterday (won't affect monthly)
-yesterday = date.today() - timedelta(days=1)
+    # to keep daily data consistant start from yesterday (won't affect monthly)
+    yesterday = date.today() - timedelta(days=1)
 
-for station in stations:
-    try:
-        # get the date for the most recent data available from the csv file name
-        newest    = sorted(os.listdir(station['name'])).pop()
-        from_date = datetime.strptime(newest[:-4], '%Y-%m-%d').date() + timedelta(days=1)
-    except FileNotFoundError:
-        # no raw data folder for this station, i.e. no data collected yet
-        os.mkdir(station['name'])
-        from_date = date(2017, 3, 5)
-    except IndexError:
-        # or go till the begining of air monitoring, i.e. 2014-03-05
-        from_date = date(2017, 3, 5)
+    for station in STATIONS:
+        try:
+            # get the date for the most recent data available from the csv file name
+            newest = sorted(os.listdir(station['name'])).pop()
+            from_date = datetime.strptime(newest[:-4], '%Y-%m-%d').date() + timedelta(days=1)
+        except FileNotFoundError:
+            # no raw data folder for this station, i.e. no data collected yet
+            os.mkdir(station['name'])
+            from_date = date(2017, 3, 5)
+        except IndexError:
+            # or go till the begining of air monitoring, i.e. 2014-03-05
+            from_date = date(2017, 3, 5)
 
 
-    date_range = (yesterday - from_date).days + 1
-    print('>>> Focusing on {}'.format(station['name']))
-    print('>>> Downloading data for {} days'.format(date_range))
+        date_range = (yesterday - from_date).days + 1
+        print('>>> Focusing on {}'.format(station['name']))
+        print('>>> Downloading data for {} days'.format(date_range))
 
-    for delta in range(date_range):
-        current_date = from_date + timedelta(days=delta)
+        for delta in range(date_range):
+            current_date = from_date + timedelta(days=delta)
 
-        url_date_format = '%d.%m.%Y' if station['period'] == 'daily' else '%m.%Y'
-        url = base_url.format(station['station'],
-                              current_date.strftime(url_date_format))
+            url_date_format = '%d.%m.%Y' if station['period'] == 'daily' else '%m.%Y'
+            url = BASE_URL.format(station['station'],
+                                  current_date.strftime(url_date_format))
 
-        if not scrape_data(url, browser):
-            print('!!! Problem while processing {}'.format(current_date))
-            continue
+            if not scrape_data(url, browser):
+                print('!!! Problem while processing {}'.format(current_date))
+                continue
 
-        time.sleep(2)
-        downloads_folder = os.path.join(os.environ['HOME'], 'Downloads')
-        fname = [f for f in os.listdir(downloads_folder) if f.startswith('dane')].pop()
-        data_file = '{}.csv'.format(current_date.strftime('%Y-%m-%d'))
+            time.sleep(2)
+            downloads_folder = os.path.join(os.environ['HOME'], 'Downloads')
+            fname = [f for f in os.listdir(downloads_folder) if f.startswith('dane')].pop()
+            data_file = '{}.csv'.format(current_date.strftime('%Y-%m-%d'))
 
-        shutil.move(os.path.join(downloads_folder, fname),
-                    os.path.join(station['name'], data_file))
+            shutil.move(os.path.join(downloads_folder, fname),
+                        os.path.join(station['name'], data_file))
 
 
-browser.quit()
+    browser.quit()
+
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main())
