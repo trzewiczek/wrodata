@@ -2,6 +2,7 @@
 
 ''' Scraper for Wrocław, Poland air pollution data collected by PIOŚ '''
 
+import json
 import os
 import shutil
 import sys
@@ -12,24 +13,11 @@ from datetime import date, datetime, timedelta
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, WebDriverException
 
-BASE_URL = 'https://demo.dacsystem.pl/dane-pomiarowe/{}/{}'
-STATIONS = [
-    {
-        'name'   : 'bartnicza',
-        'station': 'automatyczne/stacja/14/parametry/254-259-255-257/dzienny',
-        'period' : 'daily'
-    },
-    {
-        'name'   : 'korzeniowskiego',
-        'station': 'automatyczne/stacja/12/parametry/209-215-543-545-222-223-216-544-218/dzienny',
-        'period' : 'daily'
-    },
-    {
-        'name'   : 'wisniowa',
-        'station': 'automatyczne/stacja/13/parametry/241-245-242-238-244/dzienny',
-        'period' : 'daily'
-    },
-]
+with open('sources.json', 'r', encoding='utf-8') as metadata:
+    sources = json.loads(metadata.read())
+
+BASE_URL = sources['base_url']
+STATIONS = sources['stations']
 
 def scrape_data(url, browser):
     ''' Scrapes pollution data for a given url
@@ -91,8 +79,7 @@ def main():
             current_date = from_date + timedelta(days=delta)
 
             url_date_format = '%d.%m.%Y' if station['period'] == 'daily' else '%m.%Y'
-            url = BASE_URL.format(station['station'],
-                                  current_date.strftime(url_date_format))
+            url = BASE_URL + station['url'] + current_date.strftime(url_date_format)
 
             if not scrape_data(url, browser):
                 print('!!! Problem while processing {}'.format(current_date))

@@ -1,0 +1,21 @@
+{
+  "base_url": "https://demo.dacsystem.pl/dane-pomiarowe/",
+  "stations": [
+      {
+          "name"   : "bartnicza",
+          "url"    : "automatyczne/stacja/14/parametry/254-259-255-257/dzienny/",
+          "period" : "daily"
+      },
+      {
+          "name"   : "korzeniowskiego",
+          "url"    : "automatyczne/stacja/12/parametry/209-215-543-545-222-223-216-544-218/dzienny/",
+          "period" : "daily"
+      },
+      {
+          "name"   : "wisniowa",
+          "url"    : "automatyczne/stacja/13/parametry/241-245-242-238-244/dzienny/",
+          "period" : "daily"
+      }
+  ]
+}
+
