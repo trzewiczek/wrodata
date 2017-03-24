@@ -13,13 +13,7 @@ from datetime import date, datetime, timedelta
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, WebDriverException
 
-with open('sources.json', 'r', encoding='utf-8') as metadata:
-    sources = json.loads(metadata.read())
-
-BASE_URL = sources['base_url']
-STATIONS = sources['stations']
-
-def scrape_data(url, browser):
+def download_csv_file(url, browser):
     ''' Scrapes pollution data for a given url
 
         :url: data collection url
@@ -49,15 +43,18 @@ def scrape_data(url, browser):
     return False
 
 
-def main():
-    ''' Scraper's entry point '''
+def scrape(base_url, stations):
+    ''' Scraper's entry point
 
+        :base_url: common part of the stations urls
+        :stations: list of dicts containing station information
+    '''
     browser = webdriver.Chrome()
 
     # to keep daily data consistant start from yesterday (won't affect monthly)
     yesterday = date.today() - timedelta(days=1)
 
-    for station in STATIONS:
+    for station in stations:
         try:
             # get the date for the most recent data available from the csv file name
             newest = sorted(os.listdir(station['name'])).pop()
@@ -79,9 +76,9 @@ def main():
             current_date = from_date + timedelta(days=delta)
 
             url_date_format = '%d.%m.%Y' if station['period'] == 'daily' else '%m.%Y'
-            url = BASE_URL + station['url'] + current_date.strftime(url_date_format)
+            url = base_url + station['url'] + current_date.strftime(url_date_format)
 
-            if not scrape_data(url, browser):
+            if not download_csv_file(url, browser):
                 print('!!! Problem while processing {}'.format(current_date))
                 continue
 
@@ -98,4 +95,7 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    with open('sources.json', 'r', encoding='utf-8') as metadata:
+        SOURCES = json.loads(metadata.read())
+
+    sys.exit(scrape(**SOURCES))
