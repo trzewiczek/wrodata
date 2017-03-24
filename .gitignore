@@ -88,5 +88,6 @@ ENV/
 # Rope project settings
 .ropeproject
 
-# my personal opinion
+# my personal opinions
+*.swp
 .dirty_notes.md
