@@ -89,5 +89,6 @@ ENV/
 .ropeproject
 
 # my personal opinions
+*.png
 *.swp
 .dirty_notes.md
