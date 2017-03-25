@@ -1,12 +1,14 @@
 # WroData
 A collection of public data from Wrocław, Poland. 
 
-# Air Pollution
+## Air Pollution
 Collection of data from automated air pollution monitoring run by PIOŚ Wrocław. 
+
 https://demo.dacsystem.pl/dane-pomiarowe
 
 ## Traffic
 Data about traffic on eight major Wrocław crossroads monitored by ZDiUM Wrocław.  
+
 http://its.wroc.pl/statystyka-skrzyzowanie-001
 
 ## Project structure
