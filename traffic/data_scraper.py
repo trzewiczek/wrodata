@@ -42,7 +42,7 @@ def scrape_data_from(png_path):
         # The data is read by going pixel by pixel from the top of the diagram
         # to the first occurence of the orange colour. This point is taken as
         # a value for a certain hour. Pixels are read in columns representing
-        # time of the day on x axis, which in practice is every 17th column.
+        # hour of the day on x axis, i.e. 1 hour == 17 pixels.
         #         
         # Data is available on the bitmap within the rectangle:
         # x: 65px -- 372px
